@@ -40,19 +40,53 @@ document.addEventListener('DOMContentLoaded', () => {
         [1,width+1,width*2+1,width*3+1],
         [width,width+1,width+2,width+3]
       ]
-    
+
 const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
 let currentPosition = 4;
-let current = theTetrominoes[0][0];
+let currentRotation = 0;
+let random = Math.floor(Math.random()*theTetrominoes.length);
+console.log(random)
+let current = theTetrominoes[random][currentRotation];
 
-//draw
 
+//draw the tetromino
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino')
     })
 }
-draw();
+
+//undraw the tetromino
+function undraw() {
+    current.forEach(index => {
+        squares[currentPosition + index].classList.remove('tetromino')
+    })
+}
+
+//Move down tetromino
+
+timerId = setInterval(moveDown, 1000);
+
+function moveDown() {
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+}
+
+//Freeze function
+
+function freeze() {
+    if (current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+        current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+        //make new tetromino fall
+        random = Math.floor(Math.random() * theTetrominoes.length)
+        current = theTetrominoes[random] [currentRotation]
+        currentPosition = 4
+        draw();
+    }
+}
+
     
 })
