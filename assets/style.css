@@ -1,0 +1,26 @@
+:root {
+    --primary-color: #264653;
+    --secondary-color: #2a9d8f;
+    --tertiary-color: #e9c46a;
+    --quarternary-color: #f4a261;
+    --quinary-color: #e76f51;
+  }
+
+* {
+    font-family: 'Caudex', serif;
+}
+
+
+.grid{
+    width: 200px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--primary-color);
+}
+
+.grid div {
+    height: 20px;
+    width: 20px;
+    background-color: var(--tertiary-color);
+}
