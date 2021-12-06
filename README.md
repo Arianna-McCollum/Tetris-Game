@@ -5,8 +5,6 @@
   ## Description
   A simple JavaScript Tetris game.
   <br>
-  
-  Deploy Link:
 
   ## Table of Contents
   - [Description](#description)
