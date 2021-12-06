@@ -63,6 +63,13 @@ function undraw() {
         squares[currentPosition + index].classList.remove('tetromino')
     })
 }
+//Keycode functions
+function control(e) {
+    if(e.keyCode === 37) {
+        moveLeft();
+    }
+}
+document.addEventListener('keyup', control);
 
 //Move down tetromino
 
@@ -86,6 +93,16 @@ function freeze() {
         currentPosition = 4
         draw();
     }
+}
+//Move tetromino left
+function moveLeft(){
+    undraw();
+    const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0);
+    if (!isAtLeftEdge) currentPosition -=1;
+    if(current.some( index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition +=1;
+    }
+    draw();
 }
 
     
