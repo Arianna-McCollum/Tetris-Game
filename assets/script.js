@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextRandom = 0;
     let timerId;
     let score = 0;
+    const colors = [
+        '#2a9d8f',
+        '#e9c46a',
+        '#f4a261',
+        '#e76f51',
+        '#e75151'
+
+    ]
     //The Tetrominoes
     const lTetromino = [
         [1, width+1, width*2+1, 2],
@@ -48,7 +56,6 @@ const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromi
 let currentPosition = 4;
 let currentRotation = 0;
 let random = Math.floor(Math.random()*theTetrominoes.length);
-console.log(random)
 let current = theTetrominoes[random][currentRotation];
 
 
@@ -56,6 +63,7 @@ let current = theTetrominoes[random][currentRotation];
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino')
+        squares[currentPosition + index].style.backgroundColor = colors[random]
     })
 }
 
@@ -63,6 +71,7 @@ function draw() {
 function undraw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.remove('tetromino')
+        squares[currentPosition + index].style.backgroundColor = ''
     })
 }
 //Keycode functions
@@ -102,6 +111,7 @@ function freeze() {
         draw();
         displayShape();
         addScore();
+        gameOver();
     }
 }
 //Move tetromino left
@@ -151,9 +161,11 @@ const upNextTetromino = [
 function displayShape() {
     displaySquares.forEach(square => {
         square.classList.remove('tetromino')
+        square.style.backgroundColor = ''
     })
     upNextTetromino[nextRandom].forEach( index => {
         displaySquares[displayIndex +index].classList.add('tetromino')
+        displaySquares[displayIndex +index].style.backgroundColor = colors[nextRandom]
     })
 }
 
@@ -181,6 +193,7 @@ function addScore() {
             row.forEach(index => {
                 squares[index].classList.remove('taken')
                 squares[index].classList.remove('tetromino')
+                squares[index].style.backgroundColor = ''
             })
             const squaresRemoved = squares.splice(i, width);
             squares = squaresRemoved.concat(squares)
@@ -189,7 +202,14 @@ function addScore() {
     }
 }
 
-//
+// Game over
+
+function gameOver() {
+    if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        scoreDisplay.innerHTML = ' Game Over'
+        clearInterval(timerId);
+    }
+}
 
 
 
