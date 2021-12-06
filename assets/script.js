@@ -130,5 +130,17 @@ function rotate() {
     current = theTetrominoes[random] [currentRotation];
     draw();
 }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
 })

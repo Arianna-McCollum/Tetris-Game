@@ -10,6 +10,9 @@
     font-family: 'Caudex', serif;
 }
 
+.container {
+    display: flex;
+}
 
 .grid{
     width: 200px;
@@ -27,4 +30,19 @@
 
 .tetromino {
     background-color: var(--secondary-color);
+}
+
+.mini-grid {
+    margin-left: 50px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+}
+
+.mini-grid div {
+    height: 20px;
+    width: 20px;
 }
